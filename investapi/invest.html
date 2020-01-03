@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+  <table width="100%">
+    <thead><tr style="text-align:left";>
+      <th>證券代號</th>
+      <th>證券名稱</th>
+      <th>成交股數</th>
+      <th>成交金額</th>
+      <th>開盤價</th>
+      <th>最高價</th>
+      <th>最低價</th>
+      <th>收盤價</th>
+      <th>漲跌價差</th>
+      <th>成交筆數</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+
+
+  <script>
+    var data;
+    $.getJSON("invest.json")
+    .done(function(re) {
+        console.log(re);
+        data = re ;
+        let print="";
+      
+
+// 處理資料各個tr>td
+for(let i=0;i<data.length;i++){
+print+=`
+<tr>
+  <td>${data[i].證券代號}</td>
+  <td>${data[i].證券名稱}</td>
+  <td>${data[i].成交股數}</td>
+  <td>${data[i].成交金額}</td>
+  <td>${data[i].開盤價}</td>
+  <td>${data[i].最高價}</td>
+  <td>${data[i].最低價}</td>
+  <td>${data[i].收盤價}</td>
+  <td>${data[i].漲跌價差}</td>
+  <td>${data[i].成交筆數}</td>
+</tr>
+`;
+}
+
+
+
+      $("tbody").html(print);
+      })
+      .fail(function(){
+        console.log("get.api.fail");
+      });
+     
+
+    
+    
+    </script>
+
+</body>
+</html>
